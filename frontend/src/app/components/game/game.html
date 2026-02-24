@@ -1,0 +1,35 @@
+<div class="container">
+
+  @if (!termine()) {
+
+    <h2>Produit {{ indexProduit() + 1 }} / {{ produitsSession().length }}</h2>
+
+    @if (produitsSession().length > 0) {
+
+      <img [src]="produitsSession()[indexProduit()].url"
+           width="250">
+
+      <h3>{{ produitsSession()[indexProduit()].nom }}</h3>
+
+      <input type="number"
+             [(ngModel)]="prixPropose"
+             placeholder="Votre estimation">
+
+      <button (click)="envoyer()">Valider</button>
+
+      @if (prixReel() !== null) {
+        <p>Prix réel : {{ prixReel() }} €</p>
+        <p>Points gagnés : {{ points() }}</p>
+        <button (click)="suivant()">Suivant</button>
+      }
+
+    }
+
+  } @else {
+
+    <h2>Partie terminée </h2>
+    <p>Total points : {{ totalPoints() }}</p>
+
+  }
+
+</div>

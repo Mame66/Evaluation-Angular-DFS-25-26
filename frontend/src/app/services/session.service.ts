@@ -15,11 +15,14 @@ export class SessionService {
     return this.http.get<Session[]>(this.api);
   }
 
-  createSession(nom: string, createur: string): Observable<Session> {
-    return this.http.post<Session>(this.api, { nom, createur });
+  createSession(nom: string): Observable<Session> {
+    return this.http.post<Session>(this.api, { nom });
   }
 
-  envoyerReponse(sessionId: number, email: string, reponse: number) {
-    return this.http.post(`${this.api}/${sessionId}/reponse`, { email, reponse });
+  envoyerReponse(sessionId: number, reponse: number) {
+    return this.http.post(
+      `${this.api}/${sessionId}/reponse`,
+      { reponse }
+    );
   }
 }

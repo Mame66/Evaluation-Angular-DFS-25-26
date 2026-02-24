@@ -1,0 +1,11 @@
+<div class="container">
+  <h2>Créer une session</h2>
+
+  <input [(ngModel)]="nom" placeholder="Nom de la session">
+
+  <button (click)="create()">Créer</button>
+
+  @if (erreur) {
+    <p style="color:red">{{erreur}}</p>
+  }
+</div>
