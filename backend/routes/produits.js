@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const produits = require('../data/produits');
+const { authMiddleware } = require('../middleware/auth');
 
-router.get('/', (req, res) => res.json(produits));
+router.get('/', authMiddleware, (req, res) => {
+    res.json(produits);
+});
 
 module.exports = router;
