@@ -1,0 +1,43 @@
+<div class="container">
+  <header>
+    <div class="header-content">
+      <h1>🎯 Price Quest</h1>
+      <div class="user-info">
+        <span>{{ auth.user()?.email }}</span>
+        @if (auth.isAdmin()) {
+          <span class="badge-admin">Admin</span>
+        }
+        <button class="btn-logout" (click)="auth.logout()">Déconnexion</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <h2>Sessions disponibles</h2>
+      @if (auth.isAdmin()) {
+        <button class="btn-primary" [routerLink]="['/sessions/create']">+ Créer une session</button>
+      }
+    </div>
+
+    @if (loading()) {
+      <div class="loading">Chargement...</div>
+    } @else if (sessions().length === 0) {
+      <div class="empty">Aucune session disponible pour le moment.</div>
+    } @else {
+      <div class="sessions-grid">
+        @for (session of sessions(); track session.id) {
+          <div class="session-card" (click)="joinSession(session.id)">
+            <div class="session-icon">🎮</div>
+            <div class="session-info">
+              <h3>{{ session.nom }}</h3>
+              <p>Créée par {{ session.createur }}</p>
+              <p>{{ session.participantCount }} participant(s)</p>
+            </div>
+            <div class="session-arrow">→</div>
+          </div>
+        }
+      </div>
+    }
+  </main>
+</div>

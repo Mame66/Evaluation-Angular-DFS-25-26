@@ -1,28 +1,20 @@
-const utilisateurs = require('../data/utilisateurs');
+const jwt = require('jsonwebtoken');
+const SECRET = 'dfs_secret_2526';
 
-function authMiddleware(req, res, next) {
-    const email = req.headers['email'];
-
-    if (!email) {
-        return res.status(401).json({ message: "Non authentifié" });
-    }
-
-    const user = utilisateurs.find(u => u.email === email);
-
-    if (!user) {
-        return res.status(401).json({ message: "Utilisateur inconnu" });
-    }
-
-    req.user = user;
+const authenticate = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) return res.status(401).json({ message: 'Non autorisé' });
+  try {
+    req.user = jwt.verify(token, SECRET);
     next();
-}
+  } catch {
+    res.status(401).json({ message: 'Token invalide' });
+  }
+};
 
-function adminMiddleware(req, res, next) {
-    if (!req.user.admin) {
-        return res.status(403).json({ message: "Accès réservé aux administrateurs" });
-    }
+const requireAdmin = (req, res, next) => {
+  if (!req.user?.admin) return res.status(403).json({ message: 'Accès interdit' });
+  next();
+};
 
-    next();
-}
-
-module.exports = { authMiddleware, adminMiddleware };
+module.exports = { authenticate, requireAdmin, SECRET };

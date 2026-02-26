@@ -1,0 +1,33 @@
+<div class="container">
+  <header>
+    <div class="header-content">
+      <a routerLink="/sessions" class="back-btn">← Retour</a>
+      <h1>🎯 Price Quest</h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="form-card">
+      <h2>Créer une session</h2>
+      <p>4 produits seront sélectionnés aléatoirement parmi notre catalogue IKEA.</p>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="field">
+          <label>Nom de la session</label>
+          <input type="text" formControlName="nom" placeholder="Ex: DFS 25-26 Promo A" />
+          @if (form.get('nom')?.invalid && form.get('nom')?.touched) {
+            <span class="error">Le nom doit faire au moins 3 caractères</span>
+          }
+        </div>
+
+        @if (errorMessage()) {
+          <div class="alert">{{ errorMessage() }}</div>
+        }
+
+        <button type="submit" [disabled]="form.invalid || loading()">
+          {{ loading() ? 'Création...' : '🎲 Créer la session' }}
+        </button>
+      </form>
+    </div>
+  </main>
+</div>

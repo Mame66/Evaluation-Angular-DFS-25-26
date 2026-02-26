@@ -1,0 +1,143 @@
+.container {
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+header {
+  background: linear-gradient(135deg, #1a1a2e, #0f3460);
+  color: white;
+  padding: 1rem 2rem;
+}
+
+.header-content {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.back-btn {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.back-btn:hover {
+  color: white;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  flex: 1;
+  text-align: center;
+}
+
+main {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.loading,
+.empty {
+  text-align: center;
+  color: #666;
+  padding: 3rem;
+  font-size: 1.1rem;
+}
+
+.podium-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.rank-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid transparent;
+  transition: transform 0.2s;
+}
+
+.rank-card:hover {
+  transform: translateX(3px);
+}
+
+.rank-card.first {
+  border-left-color: #f1c40f;
+  background: linear-gradient(to right, #fffde7, white);
+}
+
+.rank-card.second {
+  border-left-color: #bdc3c7;
+}
+
+.rank-card.third {
+  border-left-color: #cd6133;
+}
+
+.rank-card.me {
+  box-shadow: 0 0 0 2px #0f3460, 0 4px 16px rgba(15, 52, 96, 0.2);
+}
+
+.rank-number {
+  font-size: 1.8rem;
+  width: 2.5rem;
+  text-align: center;
+}
+
+.rank-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.email {
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.you-badge {
+  background: #0f3460;
+  color: white;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.rank-points {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0f3460;
+}
+
+.actions {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: #0f3460;
+  color: white;
+  text-decoration: none;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: #1a1a2e;
+}

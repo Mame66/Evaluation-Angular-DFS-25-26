@@ -1,0 +1,87 @@
+<div class="container">
+  <header>
+    <div class="header-content">
+      <a routerLink="/sessions" class="back-btn">← Sessions</a>
+      <h1>{{ sessionData()?.nom || '...' }}</h1>
+      <span class="user-badge">{{ auth.user()?.email }}</span>
+    </div>
+  </header>
+
+  @if (loading()) {
+    <div class="center"><div class="spinner">⏳ Chargement...</div></div>
+  } @else if (sessionData()) {
+    <main>
+      <!-- Progress bar -->
+      <div class="progress-bar-container">
+        <div class="progress-bar" [style.width.%]="progressPercent()"></div>
+      </div>
+      <div class="progress-text">Question {{ currentIndex() + 1 }} / {{ totalQuestions() }}</div>
+
+      @if (currentProduct()) {
+        <div class="game-card">
+          <div class="product-section">
+            <img [src]="currentProduct().url" [alt]="currentProduct().nom" class="product-img" />
+            <h2>{{ currentProduct().nom }}</h2>
+          </div>
+
+          @if (!answered()) {
+            <div class="answer-section">
+              <p class="question-text">À quel prix pensez-vous que ce produit IKEA est vendu ?</p>
+              <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="price-input-group">
+                  <input
+                    type="number"
+                    formControlName="prix"
+                    placeholder="0.00"
+                    min="0"
+                    step="0.01"
+                  />
+                  <span class="currency">€</span>
+                </div>
+                @if (form.get('prix')?.invalid && form.get('prix')?.touched) {
+                  <span class="error">Veuillez entrer un prix valide (≥ 0)</span>
+                }
+                @if (submitError()) {
+                  <div class="alert">{{ submitError() }}</div>
+                }
+                <button type="submit" [disabled]="form.invalid || submitting()">
+                  {{ submitting() ? 'Envoi...' : 'Envoyer 🎯' }}
+                </button>
+              </form>
+            </div>
+          } @else {
+            <div class="result-section">
+              <div class="result-row">
+                <div class="result-item">
+                  <span class="label">Votre réponse</span>
+                  <span class="value your-answer">{{ lastResult()?.yourAnswer?.toFixed(2) }} €</span>
+                </div>
+                <div class="result-item highlight">
+                  <span class="label">Prix réel</span>
+                  <span class="value real-price">{{ lastResult()?.prixReel?.toFixed(2) }} €</span>
+                </div>
+                <div
+                  class="result-item"
+                  [class.great]="lastResult()!.points >= 80"
+                  [class.ok]="lastResult()!.points >= 40 && lastResult()!.points < 80"
+                  [class.bad]="lastResult()!.points < 40"
+                >
+                  <span class="label">Points</span>
+                  <span class="value points">+{{ lastResult()?.points }}</span>
+                </div>
+              </div>
+
+              @if (!isLastQuestion()) {
+                <button class="btn-next" (click)="nextQuestion()">Question suivante →</button>
+              } @else {
+                <button class="btn-classement" [routerLink]="['/sessions', sessionId(), 'classement']">
+                  🏆 Voir le classement
+                </button>
+              }
+            </div>
+          }
+        </div>
+      }
+    </main>
+  }
+</div>

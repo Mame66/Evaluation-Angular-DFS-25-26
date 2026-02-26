@@ -1,0 +1,28 @@
+<div class="login-container">
+  <div class="login-card">
+    <h1>🎯 Price Quest</h1>
+    <h2>Connexion</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="field">
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="email@exemple.com" />
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <span class="error">Email invalide</span>
+        }
+      </div>
+      <div class="field">
+        <label>Mot de passe</label>
+        <input type="password" formControlName="password" placeholder="••••••••" />
+        @if (form.get('password')?.invalid && form.get('password')?.touched) {
+          <span class="error">Mot de passe requis (min 3 caractères)</span>
+        }
+      </div>
+      @if (errorMessage()) {
+        <div class="alert">{{ errorMessage() }}</div>
+      }
+      <button type="submit" [disabled]="form.invalid || loading()">
+        {{ loading() ? 'Connexion...' : 'Se connecter' }}
+      </button>
+    </form>
+  </div>
+</div>

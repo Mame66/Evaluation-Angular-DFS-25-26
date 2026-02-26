@@ -1,0 +1,93 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+}
+
+.login-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  text-align: center;
+  color: #555;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+.field {
+  margin-bottom: 1.2rem;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  border-color: #0f3460;
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 0.82rem;
+  margin-top: 0.3rem;
+  display: block;
+}
+
+.alert {
+  background: #fdecea;
+  color: #c0392b;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+button {
+  width: 100%;
+  padding: 0.9rem;
+  background: #0f3460;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover:not(:disabled) {
+  background: #16213e;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

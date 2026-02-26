@@ -1,0 +1,46 @@
+<div class="container">
+  <header>
+    <div class="header-content">
+      <a routerLink="/sessions" class="back-btn">← Retour aux sessions</a>
+      <h1>🏆 Classement</h1>
+    </div>
+  </header>
+
+  <main>
+    @if (loading()) {
+      <div class="loading">Chargement du classement...</div>
+    } @else if (classement().length === 0) {
+      <div class="empty">Aucun résultat disponible.</div>
+    } @else {
+      <div class="podium-section">
+        @for (entry of classement(); track entry.utilisateur; let i = $index) {
+          <div
+            class="rank-card"
+            [class.first]="i === 0"
+            [class.second]="i === 1"
+            [class.third]="i === 2"
+            [class.me]="entry.utilisateur === auth.user()?.email"
+          >
+            <div class="rank-number">
+              @if (i === 0) { 🥇 }
+              @else if (i === 1) { 🥈 }
+              @else if (i === 2) { 🥉 }
+              @else { {{ i + 1 }} }
+            </div>
+            <div class="rank-info">
+              <span class="email">{{ entry.utilisateur }}</span>
+              @if (entry.utilisateur === auth.user()?.email) {
+                <span class="you-badge">Vous</span>
+              }
+            </div>
+            <div class="rank-points">{{ entry.points }} pts</div>
+          </div>
+        }
+      </div>
+
+      <div class="actions">
+        <a routerLink="/sessions" class="btn-primary">Voir toutes les sessions</a>
+      </div>
+    }
+  </main>
+</div>
